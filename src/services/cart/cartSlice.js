@@ -81,8 +81,6 @@ const cartSlice = createSlice({
       const noOfProducts = parseFloat(import.meta.env.VITE_NO_OF_PRODUCTS);
       const shippingCharges = parseFloat(import.meta.env.VITE_SHIPPING_CHARGES);
 
-      console.log("no", noOfProducts, "shi", shippingCharges); // Debugging line to check the values
-
       const shippingChargesFinal =
         state.products.length <= noOfProducts && state.products.length !== 0
           ? shippingCharges
@@ -90,10 +88,10 @@ const cartSlice = createSlice({
       const total = netTotal + taxes + shippingChargesFinal;
 
       state.totals = {
-        netTotal,
-        taxes,
+        netTotal: netTotal.toFixed(2),
+        taxes: taxes.toFixed(2),
         shippingCharges: shippingChargesFinal,
-        total,
+        total: total.toFixed(2),
       };
     },
     clearCart: (state) => {

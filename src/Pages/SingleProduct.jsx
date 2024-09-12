@@ -6,7 +6,7 @@ import {
 } from "../constants/index.jsx";
 import { Button } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
-import Reviews from "../Components/UserComponents/Reviews.jsx";
+import SubmitReviews from "../Components/UserComponents/SubmitReviews.jsx";
 import ProductSlider from "../Components/HomePageComponents/ProductSlider.jsx";
 import ShoppingCartDialog from "../Components/UserComponents/ShoppingCart.jsx";
 import { useParams, useNavigate } from "react-router-dom";
@@ -241,7 +241,8 @@ export default function SingleProduct() {
         ))}
       </div>
 
-      <Reviews />
+      {/* Sending Review section is here */}
+      <SubmitReviews />
 
       <div className="w-5/6 mx-auto py-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 gap-x-2 mb-12">

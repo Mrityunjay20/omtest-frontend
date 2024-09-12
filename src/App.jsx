@@ -12,8 +12,9 @@ import CheckoutPage from "./Pages/CheckoutPage";
 import TermsOfUse from "./Pages/TermsOfUse";
 import ReturnPolicy from "./Pages/ReturnPolicy";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
-import LoginPage from "./Pages/Login";
-import { store } from "./utils/store.js";
+import Login from "./Pages/LoginPage.jsx";
+import UserDashboard from "./Components/UserComponents/UserDashboard.jsx";
+import Signup from "./Pages/SignupPage.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -115,11 +116,19 @@ function App() {
             </div>
           ),
         },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/signup",
+          element: <Signup />,
+        },
+        {
+          path: "/userdashboard",
+          element: <UserDashboard />,
+        },
       ],
-    },
-    {
-      path: "/login",
-      element: <LoginPage />,
     },
   ]);
   return <RouterProvider router={router} />;
