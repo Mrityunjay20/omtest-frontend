@@ -24,8 +24,8 @@ export default function ShoppingCartDialog({ size, handleOpen }) {
     dispatch(calculateTotals());
   }, [products, dispatch]);
 
-  const handleQuantityChange = (productId, delta) => {
-    dispatch(updateQuantity({ productId, quantity: delta }));
+  const handleQuantityChange = (productId, delta, size) => {
+    dispatch(updateQuantity({ productId, quantity: delta, size }));
   };
 
   const handleDelete = (id, size) => {

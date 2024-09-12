@@ -11,15 +11,43 @@ import HeroGallery from "../Components/HomePageComponents/Herogallery";
 import Testimonials from "../Components/HomePageComponents/Testimonial";
 import ContactForm from "../Components/HomePageComponents/ContactForm";
 import HeroBlogs from "../Components/HomePageComponents/HeroBlogs";
+import img1 from "../assets/HomePage/Homepage_1.png";
+import img2 from "../assets/HomePage/Homepage_2.png";
+import img3 from "../assets/HomePage/Homepage_3.png";
+import img4 from "../assets/HomePage/Homepage_4.png";
+import { Carousel } from "@material-tailwind/react";
 export default function HomePage() {
   return (
     <>
       <div>
-        <img
+        <Carousel autoplay={true} className="-z-10">
+          <img
+            src={img1}
+            alt="image 1"
+            className="h-auto w-full max-h-[80vh]  object-fit object-center"
+          />
+          <img
+            src={img2}
+            alt="image 2"
+            className="h-auto w-full max-h-[80vh]  object-fit object-center"
+          />
+          <img
+            src={img3}
+            alt="image 3"
+            className="h-auto w-full max-h-[80vh] object-fit  object-center"
+          />
+          <img
+            src={img4}
+            alt="image 4"
+            className="h-auto w-full max-h-[80vh] object-fit object-center"
+          />
+        </Carousel>
+
+        {/* <img
           className="h-[560px] w-full object-cover object-center"
           src="https://images.unsplash.com/photo-1682407186023-12c70a4a35e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80"
           alt="nature image"
-        />
+        /> */}
       </div>
 
       <div className="flex flex-col lg:relative items-center lg:h-screen justify-center bg-white p-8">

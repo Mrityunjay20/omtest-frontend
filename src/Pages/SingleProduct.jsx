@@ -12,7 +12,9 @@ import ShoppingCartDialog from "../Components/UserComponents/ShoppingCart.jsx";
 import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axios";
 import { useDispatch } from "react-redux";
+import { Spinner } from "@material-tailwind/react";
 import { addItem, clearCart } from "../services/cart/cartSlice.js";
+import bannerImg from "../assets/SingleProductPage/product-page-banner.gif";
 
 export default function SingleProduct() {
   const { id } = useParams();
@@ -89,15 +91,20 @@ export default function SingleProduct() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div className="w-screen h-screen flex justify-center items-center">
+        <Spinner className="h-12 w-12" />
+      </div>
+    );
   if (error) return <div>{Error}</div>;
 
   return (
     <div className="bg-white">
       <div>
         <img
-          className="h-96 w-full object-cover object-center"
-          src="https://images.unsplash.com/photo-1682407186023-12c70a4a35e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80"
+          className="w-full h-[40vh] md:h-[40vh] lg:h-[60vh] objec-fit object-center"
+          src={bannerImg}
           alt="Nature"
         />
       </div>

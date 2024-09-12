@@ -38,15 +38,16 @@ const cartSlice = createSlice({
       calculateTotals(state);
     },
     updateQuantity: (state, action) => {
-      const { productId, quantity } = action.payload;
+      const { productId, quantity, size } = action.payload;
       const existingProduct = state.products.find(
-        (product) => product.productId === productId
+        (product) => product.productId === productId && product.size === size
       );
       if (existingProduct) {
         existingProduct.quantity += quantity;
         if (existingProduct.quantity <= 0) {
           state.products = state.products.filter(
-            (product) => product.productId !== productId
+            (product) =>
+              !(product.productId === productId && product.size === size)
           );
         }
         calculateTotals(state);

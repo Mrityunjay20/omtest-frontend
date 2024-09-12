@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../Components/UserComponents/ProductCard";
 import axiosInstance from "../utils/axios";
+import { Spinner } from "@material-tailwind/react";
 
 export default function Product() {
   const [data, setData] = useState(null);
@@ -23,9 +24,18 @@ export default function Product() {
     fetchData();
   }, []);
 
-  if (loading) return <div className="text-center p-4">Loading...</div>; // Show loading state
+  if (loading)
+    return (
+      <div className="w-screen h-screen flex items-center justify-center ">
+        <Spinner className="h-12 w-12" />
+      </div>
+    ); // Show loading state
   if (error)
-    return <div className="text-center p-4 text-red-500">Error: {error}</div>; // Show error state
+    return (
+      <div className="text-center p-4 text-red-500 w-screen h-screen flex items-center justify-center">
+        Error: {error}
+      </div>
+    ); // Show error state
 
   return (
     <>

@@ -50,7 +50,7 @@ export default function Header() {
       </div>
 
       {/* Menu */}
-      <div className="flex relative bg-green-900 text-white text-lg items-center justify-between py-4 md:py-6 px-8 md:px-16">
+      <div className="flex z-100 relative bg-green-900 text-white text-lg items-center justify-between py-4 md:py-6 px-8 md:px-16">
         {/* Hamburger Menu */}
         <div className="md:hidden flex items-center">
           <button
@@ -81,7 +81,7 @@ export default function Header() {
         <div className="rounded-full md:absolute top-4 p-14 ml-14 md:m-0 bg-white"></div>
 
         {/* Full Menu Links - Hidden on small screens */}
-        <div className="menu hidden md:flex flex-row items-center space-x-6 lg:space-x-8 pl-32 lg:pl-36 font-bold">
+        <div className="menu  hidden md:flex flex-row items-center space-x-6 lg:space-x-8 pl-32 lg:pl-36 font-bold">
           {headerLinks.map((heading, index) => (
             <a key={index} href={heading.href}>
               <p className="py-2">{heading.name}</p>
@@ -92,7 +92,7 @@ export default function Header() {
         {/* Search and Cart */}
         <div className="flex items-center">
           <div className="flex items-center space-x-4 p-4 lg:border-r-2 border-gray-500">
-            <i className="fa-solid fa-magnifying-glass"></i>
+            {/* <i className="fa-solid fa-magnifying-glass"></i> */}
             <i className="fa-solid fa-cart-shopping"></i>
             <i
               onClick={() => navigate("/userdashboard")}

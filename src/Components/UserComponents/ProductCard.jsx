@@ -12,6 +12,8 @@ export default function ProductCard({ product }) {
     }
   }
 
+  console.log(product);
+
   return (
     <>
       <div
@@ -34,9 +36,9 @@ export default function ProductCard({ product }) {
             {product.name}
           </h2>
           <div>
-            <p className="text-xs md:text-md lg:text-lg ">
+            <p className=" py-2 text-xs md:text-md lg:text-xl ">
               {/* {product.discountprice} */}
-              10000
+              Rs. {product.sizes[0].discountPrice}
             </p>
             <div className="text-yellow-700 text-xs space-x-2">
               <i className="fa-solid fa-star"></i>
