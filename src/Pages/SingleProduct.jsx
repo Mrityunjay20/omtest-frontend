@@ -4,7 +4,6 @@ import {
   sections,
   faqs,
 } from "../constants/index.jsx";
-import { Button } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import SubmitReviews from "../Components/UserComponents/SubmitReviews.jsx";
 import ProductSlider from "../Components/HomePageComponents/ProductSlider.jsx";
@@ -14,7 +13,8 @@ import axiosInstance from "../utils/axios";
 import { useDispatch } from "react-redux";
 import { Spinner } from "@material-tailwind/react";
 import { addItem, clearCart } from "../services/cart/cartSlice.js";
-import bannerImg from "../assets/SingleProductPage/product-page-banner.gif";
+import { Button, Carousel, IconButton } from "@material-tailwind/react";
+import productpagebanner from "../assets/2400x1600/productpagebanner.gif";
 
 export default function SingleProduct() {
   const { id } = useParams();
@@ -57,6 +57,15 @@ export default function SingleProduct() {
       alert("Select a size first");
     }
   };
+  useEffect(() => {
+    const element = document.getElementById(`product`);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start", // This ensures the element is aligned at the start of the viewport
+      });
+    }
+  }, [id]);
 
   useEffect(() => {
     if (!id || isNaN(id)) {
@@ -68,6 +77,7 @@ export default function SingleProduct() {
         const response = await axiosInstance.get(`/shop/${id}`); // Fetch data for specific product
         setSingleProduct(response.data);
         setSelectedSize(response.data.sizes[0]);
+        setSelectedImage(response.data.imageUrl[0]);
         setLoading(false); // Data fetched successfully
       } catch (err) {
         console.error("Error fetching product data:", err);
@@ -82,6 +92,10 @@ export default function SingleProduct() {
   const [isOpen, setIsOpen] = useState(false);
 
   const [openSection, setOpenSection] = useState("description");
+  const [selectedImage, setSelectedImage] = useState(null);
+  const handleImageClick = (image) => {
+    setSelectedImage(image);
+  };
   const toggleSection = (section) => {
     setOpenSection(openSection === section ? "" : section);
   };
@@ -101,24 +115,58 @@ export default function SingleProduct() {
 
   return (
     <div className="bg-white">
-      <div>
+      <Carousel
+        autoplay="false"
+        loop="true"
+        navigation={({ setActiveIndex, activeIndex, length }) => (
+          <div className="hidden absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
+            {new Array(length).fill("").map((_, i) => (
+              <span
+                key={i}
+                className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${
+                  activeIndex === i ? "w-8 bg-white" : "w-4 bg-white/50"
+                }`}
+                onClick={() => setActiveIndex(i)}
+              />
+            ))}
+          </div>
+        )}
+        prevArrow={({ handlePrev }) => (
+          <IconButton className="hidden "></IconButton>
+        )}
+        nextArrow={({ handlePrev }) => (
+          <IconButton className="hidden "></IconButton>
+        )}
+      >
         <img
-          className="w-full h-[40vh] md:h-[40vh] lg:h-[60vh] objec-fit object-center"
-          src={bannerImg}
-          alt="Nature"
+          src={[productpagebanner]}
+          alt="image 1"
+          className="w-full object-fit"
         />
-      </div>
+      </Carousel>
 
-      {/* image banner */}
-      <div className="md:flex p-2 sm:p-6 lg:p-12 lg:px-24 items-start justify-center bg-white rounded-lg mx-auto">
+      <div
+        id="product"
+        className="md:flex p-2 sm:p-6 lg:p-12 lg:px-24 items-start justify-center bg-white rounded-lg mx-auto"
+      >
         <div className="md:w-1/2 flex flex-col items-center justify-start">
           <img
-            src={singleProduct?.imageUrl?.[0]}
+            src={selectedImage}
             alt={singleProduct.name}
             className="w-full max-w-96 md:max-w-full px-8 h-[300px] md:h-[550px] object-cover rounded-sm"
           />
+          <div className=" -m-8 md:-m-10 flex w-full justify-center space-x-2">
+            {singleProduct.imageUrl.map((product, key) => (
+              <img
+                key={key} // Add the key prop for each product
+                src={product} // Image source from product
+                alt={`Thumbnail ${key + 1}`} // Dynamic alt text for each image
+                className="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full cursor-pointer border-2"
+                onClick={() => handleImageClick(singleProduct.imageUrl[key])} // Click event handler
+              />
+            ))}
+          </div>
         </div>
-        {/* image banner */}
 
         <div className="md:w-1/2 py-12 p-3 md:py-0 space-y-2 flex flex-col items-center md:items-start ">
           <h2 className="text-3xl font-semibold text-center md:text-left text-green-900">
@@ -242,7 +290,9 @@ export default function SingleProduct() {
               )}
             </button>
             {openSection === section.id && (
-              <div className="px-4 pb-3 text-gray-500">{section.content}</div>
+              <div className="px-4 pb-3 text-gray-500">
+                {singleProduct[section.id]}
+              </div>
             )}
           </div>
         ))}
@@ -252,41 +302,6 @@ export default function SingleProduct() {
       <SubmitReviews />
 
       <div className="w-5/6 mx-auto py-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 gap-x-2 mb-12">
-          <div className="flex flex-col items-center">
-            <img
-              src="https://plus.unsplash.com/premium_photo-1680734656903-7128c6d84206?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fGljb24lMjB3aGl0ZXxlbnwwfHwwfHx8MA%3D%3D"
-              alt="Made In India"
-              className="w-24 h-24 md:w-32 md:h-32 rounded-full"
-            />
-            <p className="mt-2 font-semibold text-center">Made In India</p>
-          </div>
-          <div className="flex flex-col items-center">
-            <img
-              src="https://plus.unsplash.com/premium_photo-1680734656903-7128c6d84206?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fGljb24lMjB3aGl0ZXxlbnwwfHwwfHx8MA%3D%3D"
-              alt="Start Up India"
-              className="w-24 h-24 md:w-32 md:h-32 rounded-full"
-            />
-            <p className="mt-2 font-semibold text-center">Start Up India</p>
-          </div>
-          <div className="flex flex-col items-center">
-            <img
-              src="https://plus.unsplash.com/premium_photo-1680734656903-7128c6d84206?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fGljb24lMjB3aGl0ZXxlbnwwfHwwfHx8MA%3D%3D"
-              alt="Hand Made"
-              className="w-24 h-24 md:w-32 md:h-32 rounded-full"
-            />
-            <p className="mt-2 font-semibold text-center">Hand Made</p>
-          </div>
-          <div className="flex flex-col items-center">
-            <img
-              src="https://plus.unsplash.com/premium_photo-1680734656903-7128c6d84206?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fGljb24lMjB3aGl0ZXxlbnwwfHwwfHx8MA%3D%3D"
-              alt="Small Batches"
-              className="w-24 h-24 md:w-32 md:h-32 rounded-full"
-            />
-            <p className="mt-2 font-semibold text-center">Small Batches</p>
-          </div>
-        </div>
-
         <div className="mt-12">
           <h2 className="text-2xl font-bold text-center mb-8">
             Frequently Asked Questions

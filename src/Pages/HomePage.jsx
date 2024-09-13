@@ -4,6 +4,7 @@ import {
   newProducts,
   latestBlogs,
 } from "../constants";
+import { Carousel, IconButton } from "@material-tailwind/react";
 import ProductSlider from "../Components/HomePageComponents/ProductSlider";
 import HeroSection from "../Components/HomePageComponents/HeroSection";
 import ImpactCreated from "../Components/HomePageComponents/ImpactCreated";
@@ -11,102 +12,110 @@ import HeroGallery from "../Components/HomePageComponents/Herogallery";
 import Testimonials from "../Components/HomePageComponents/Testimonial";
 import ContactForm from "../Components/HomePageComponents/ContactForm";
 import HeroBlogs from "../Components/HomePageComponents/HeroBlogs";
-import img1 from "../assets/HomePage/Homepage_1.png";
-import img2 from "../assets/HomePage/Homepage_2.png";
-import img3 from "../assets/HomePage/Homepage_3.png";
-import img4 from "../assets/HomePage/Homepage_4.png";
-import { Carousel } from "@material-tailwind/react";
+import homepagemain from "../assets/2400x1600/homepagemain.gif";
+import homepage1 from "../assets/2400x1600/homepage1.png";
+import homepage2 from "../assets/2400x1600/homepage2.png";
+import homepage3 from "../assets/2400x1600/homepage3.png";
+import homepage4 from "../assets/2400x1600/homepage4.png";
+import lessoil from "../assets/lessoil.png";
+import organic from "../assets/organic.png";
+import properlycooked from "../assets/properlycooked.png";
+import AboutBundelkhand from "../assets/AboutBundelkhand.png";
+import { useNavigate } from "react-router-dom";
+
 export default function HomePage() {
+  const navigate = useNavigate();
   return (
     <>
-      <div>
-        <Carousel autoplay={true} className="-z-10">
-          <img
-            src={img1}
-            alt="image 1"
-            className="h-auto w-full max-h-[80vh]  object-fit object-center"
-          />
-          <img
-            src={img2}
-            alt="image 2"
-            className="h-auto w-full max-h-[80vh]  object-fit object-center"
-          />
-          <img
-            src={img3}
-            alt="image 3"
-            className="h-auto w-full max-h-[80vh] object-fit  object-center"
-          />
-          <img
-            src={img4}
-            alt="image 4"
-            className="h-auto w-full max-h-[80vh] object-fit object-center"
-          />
-        </Carousel>
-
-        {/* <img
-          className="h-[560px] w-full object-cover object-center"
-          src="https://images.unsplash.com/photo-1682407186023-12c70a4a35e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80"
-          alt="nature image"
-        /> */}
-      </div>
-
+      <Carousel
+        className="-z-10"
+        autoplay="true"
+        autoplayDelay="5000"
+        loop="true"
+        navigation={({ setActiveIndex, activeIndex, length }) => (
+          <div className="hidden absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
+            {new Array(length).fill("").map((_, i) => (
+              <span
+                key={i}
+                className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${
+                  activeIndex === i ? "w-8 bg-white" : "w-4 bg-white/50"
+                }`}
+                onClick={() => setActiveIndex(i)}
+              />
+            ))}
+          </div>
+        )}
+        prevArrow={({ handlePrev }) => (
+          <IconButton className="hidden "></IconButton>
+        )}
+        nextArrow={({ handlePrev }) => (
+          <IconButton className="hidden "></IconButton>
+        )}
+      >
+        <img src={homepagemain} alt="image 1" className="w-full object-fit" />
+        <img src={homepage1} alt="image 2" className="w-full object-fit" />
+        <img src={homepage2} alt="image 2" className="w-full object-fit" />
+        <img src={homepage3} alt="image 2" className="w-full object-fit" />
+        <img src={homepage4} alt="image 2" className="w-full object-fit" />
+      </Carousel>
       <div className="flex flex-col lg:relative items-center lg:h-screen justify-center bg-white p-8">
         {/* DIVIDING DIV BETWEEN IMAGES */}
-        <div className="lg:absolute lg:-top-20 grid lg:grid-cols-3 py-8 gap-4 lg:w-4/5 bg-white rounded-md shadow-xl">
-          <div className="flex justify-center items-center space-x-8 px-8 lg:border-r-4">
-            <img
-              src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
-              className="size-24 rounded-full"
-            ></img>
+        <div className="lg:absolute lg:-top-20 gap-4 lg:gap-0 grid lg:grid-cols-3 py-8 lg:w-4/5 bg-white rounded-md shadow-xl">
+          <div className="flex lg:justify-center items-center space-x-4 px-8 lg:border-r-4">
+            <img src={lessoil} className="size-16 md:size-24 lg:size-20"></img>
             <div>
               <h2 className="text-green-900 font-bold text-2xl">Less oil</h2>
-              <p>Our pickles are made with less oil and more love</p>
+              <p className="text-left">
+                Our pickles are made with less oil and more love
+              </p>
             </div>
           </div>
 
-          <div className="flex justify-center items-center space-x-8 px-8 lg:border-r-4">
-            <img
-              src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
-              className="size-24 rounded-full"
-            ></img>
+          <div className="flex lg:justify-center items-center space-x-4 px-8 lg:border-r-4">
+            <img src={organic} className="size-16 md:size-24 lg:size-20 "></img>
             <div>
               <h2 className="text-green-900 font-bold text-2xl">
                 Organic Ingredients
               </h2>
-              <p> Has 0 preservatives and has 100% बुंदेलखंडी Swaad</p>
+              <p className="text-left">
+                {" "}
+                Has 0 preservatives and has 100% बुंदेलखंडी Swaad
+              </p>
             </div>
           </div>
 
-          <div className="flex justify-center items-center space-x-8 px-8">
+          <div className="flex lg:justify-center items-center space-x-4 px-8">
             <img
-              src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
-              className="size-24 rounded-full"
+              src={properlycooked}
+              className="size-16 md:size-24 lg:size-20 "
             ></img>
             <div>
               <h2 className="text-green-900 font-bold text-2xl">
                 Cooked properly
               </h2>
-              <p>Bundelkhand's raw culture infused with tender ingredients.</p>
+              <p className="text-left">
+                Bundelkhand's raw culture infused with tender ingredients.
+              </p>
             </div>
           </div>
         </div>
 
         {/* CATEGORY */}
-        <div className="lg:absolute w-full py-12 flex flex-col lg:top-40 items-center justify-center">
+        <div className="lg:absolute w-full pt-12 flex flex-col lg:top-40 items-center justify-center">
           <h2 className="text-lg lg:text-3xl text-green-900">
             Recently Category
           </h2>
           <h1 className="text-3xl lg:text-5xl text-center py-2 font-bold">
             Browse by Category
           </h1>
-          <div className="lg:flex w-3/4 lg:w-full py-6 lg:p-12 space-y-6 lg:space-y-0 lg:space-x-12 justify-center items-center">
+          <div className="lg:flex w-3/4 lg:w-full py-6 lg:p-6 space-y-6 lg:space-y-0 lg:space-x-12 justify-center items-center">
             {categories.map((category, index) => (
-              <div className="text-center bg-green-900 p-4 lg:w-1/4 rounded-lg">
-                <div className="rounded-full object-fill">
+              <div className="text-center  lg:h-60 bg-green-900 p-4 lg:w-1/4 rounded-lg">
+                <div className="object-fill">
                   <img
                     src={category.href}
                     alt={category.name}
-                    class="mx-auto size-32 rounded-full"
+                    class="mx-auto size-32"
                   />
                 </div>
                 <p className="pt-6 text-white text-xl font-bold">
@@ -119,17 +128,18 @@ export default function HomePage() {
       </div>
 
       {/* ABOUT US  */}
-
-      <div className="lg:flex h-full">
-        <div className="lg:relative bg-green-900 w-full lg:w-1/4 lg:h-80">
+      <div className="lg:flex lg:py-12 h-full">
+        <div className="lg:relative bg-green-900 w-full lg:w-1/2 lg:h-80">
           <img
-            className="lg:absolute lg:left-40 top-12 shadow-xl rounded-sm h-[520px] object-cover object-center"
-            src="https://images.unsplash.com/photo-1682407186023-12c70a4a35e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80"
-            alt="nature image"
+            className="lg:absolute w-full lg:left-24 top-12 shadow-xl rounded-sm h-[520px] object-cover object-center"
+            src={AboutBundelkhand}
+            alt="About Bundelkhand"
           />
         </div>
-        <div className="lg:pl-48 py-8 px-4 w-full lg:w-3/4 lg:px-24">
-          <h2 className="text-lg lg:text-3xl text-green-900">About us</h2>
+        <div className="lg:pl-48 py-4 px-4 w-full lg:w-3/4 lg:px-24">
+          <h2 className="text-lg lg:text-3xl text-green-900">
+            Explore Bundelkhand
+          </h2>
           <h1 className="text-3xl lg:text-5xl py-2 font-bold w-full lg:w-2/3">
             Re-introducing the world to the lost culture of Bundelkhand
           </h1>
@@ -143,28 +153,10 @@ export default function HomePage() {
           </p>
           <hr className="border-t-2 w-3/4 p-4 border-black" />
 
-          <div className="px-4 pb-6">
-            <ul className="list-disc">
-              <li>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit
-                Deserunt quisquam nihil adipisci.
-              </li>
-              <li>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit
-                Deserunt quisquam nihil adipisci.
-              </li>
-              <li>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit
-                Deserunt quisquam nihil adipisci.
-              </li>
-              <li>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit
-                Deserunt quisquam nihil adipisci.
-              </li>
-            </ul>
-          </div>
-
-          <button className="bg-green-900 font-semibold px-4 py-2 text-white rounded-sm">
+          <button
+            onClick={() => navigate("/discover")}
+            className="bg-green-900 font-semibold px-4 py-2 text-white rounded-sm"
+          >
             About More
           </button>
         </div>
@@ -183,7 +175,7 @@ export default function HomePage() {
               <div className=" absolute -top-12 lg:-top-20 size-24 md:size-32 lg:size-36 xl:size-44 flex flex-col justify-center items-center bg-yellow-700 rounded-full">
                 <img
                   src={work.href}
-                  className="size-20 md:size-28 lg:size-32 xl:size-40 rounded-full"
+                  className="size-16 md:size-20 lg:size-24 xl:size-28 object-fill "
                 />
               </div>
               <div className="pt-16 md:pt-24 lg:pt-28 pb-12">
@@ -215,18 +207,18 @@ export default function HomePage() {
         <ImpactCreated />
       </div>
 
-      <HeroGallery />
+      {/* <HeroGallery /> */}
       <Testimonials />
-      <div className="overflow-hidden">
+      <div id="contact" className="overflow-hidden">
         <ContactForm />
       </div>
 
       <div className="pt-8 md:pt-12 lg:pt-20 text-center">
-        <h2 className="text-lg lg:text-3xl text-green-900">Product Range</h2>
+        {/* <h2 className="text-lg lg:text-3xl text-green-900">Product Range</h2>
         <h1 className="text-3xl lg:text-5xl mx-auto py-2 font-bold w-2/3">
           New and Favourite
-        </h1>
-        <HeroBlogs blogs={latestBlogs} />
+        </h1> */}
+        {/* <HeroBlogs blogs={latestBlogs} /> */}
       </div>
     </>
   );

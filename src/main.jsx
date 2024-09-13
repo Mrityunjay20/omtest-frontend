@@ -5,10 +5,12 @@ import { Provider } from "react-redux";
 
 import App from "./App.jsx";
 import "./index.css";
+import ScrollToTop from "./Components/ScrollToTop.jsx";
 
 createRoot(document.getElementById("root")).render(
   <ThemeProvider>
     <Provider store={store}>
+      {/* <ScrollToTop /> */}
       <App />
     </Provider>
   </ThemeProvider>

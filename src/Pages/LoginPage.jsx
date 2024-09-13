@@ -8,6 +8,7 @@ import { auth, provider } from "../firebaseConfig";
 import ForgotPasswordDialog from "../Components/UserComponents/ForgotPassword";
 import { Alert, Button } from "@material-tailwind/react";
 import { useState } from "react";
+import logo from "../assets/logo.png";
 
 const Login = () => {
   const emailRef = useRef();
@@ -64,16 +65,16 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("accesstoken")) {
+    if (auth.currentUser) {
       navigate("/userdashboard");
     }
   }, [isLoggedIn, navigate]);
 
   return (
-    <div className="flex h-screen bg-black">
+    <div className="flex h-screen">
       <img
         className="hidden md:flex md:w-1/2 object-cover opacity-70"
-        //  src={img1}
+        src={logo}
       ></img>
       <div className="w-full md:w-1/2 flex flex-col justify-center items-center bg-white p-8">
         {!rightUser ? (

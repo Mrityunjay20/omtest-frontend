@@ -15,6 +15,7 @@ import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import Login from "./Pages/LoginPage.jsx";
 import UserDashboard from "./Components/UserComponents/UserDashboard.jsx";
 import Signup from "./Pages/SignupPage.jsx";
+import ScrollToTop from "./Components/ScrollToTop.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -133,5 +134,7 @@ function App() {
   ]);
   return <RouterProvider router={router} />;
 }
+
+// Wrapper component to use hooks with RouterProvider
 
 export default App;

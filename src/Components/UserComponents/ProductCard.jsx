@@ -23,7 +23,7 @@ export default function ProductCard({ product }) {
         <div className="w-full p-2 rounded-xl transition duration-300 ease-in-out transform hover:scale-105">
           <img
             className="h-40 sm:h-56 md:h-56 xl:h-80 w-full rounded-xl object-cover transition-opacity duration-300"
-            src={product.imageUrl[0]}
+            src={product.bannerUrl}
             alt={product.name}
           />
           <button className="absolute text-white text-xs lg:text-lg rounded-full bottom-0 right-0 m-3 px-2 lg:px-3 py-1 bg-green-900">
