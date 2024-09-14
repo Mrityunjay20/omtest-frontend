@@ -6,16 +6,18 @@
       "use": "@vercel/node"
     }
   ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "index.js",
-      "headers": {
-        "X-Forwarded-Proto": "http"
-      }
-    }
-  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Forwarded-Proto",
+          "value": "http"
+        }
+      ]
+    }
   ]
 }
