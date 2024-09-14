@@ -1,10 +1,11 @@
 // src/config/axiosConfig.js
 
 import axios from "axios";
+import { apiString } from "../services/apicalls";
 
 // Create an Axios instance with default settings
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000", // Base URL for the API
+  baseURL: apiString, // Base URL for the API
   timeout: 10000, // Request timeout in milliseconds
   headers: {
     "Content-Type": "application/json",
