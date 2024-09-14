@@ -95,55 +95,53 @@ const CheckoutPage = () => {
   };
   
   
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  //   const requiredFields = ['firstName', 'lastName', 'streetAddress', 'city', 'state', 'pinCode', 'phone', 'email'];
-  //   const isFormComplete = requiredFields.every(field => formData[field]);
+    const requiredFields = ['firstName', 'lastName', 'streetAddress', 'city', 'state', 'pinCode', 'phone', 'email'];
+    const isFormComplete = requiredFields.every(field => formData[field]);
 
-  //   if (!isFormComplete) {
-  //     alert("Please fill out all required fields before placing the order.");
-  //     return;
-  //   }
+    if (!isFormComplete) {
+      alert("Please fill out all required fields before placing the order.");
+      return;
+    }
 
-  //   if (products.length === 0) {
-  //     alert("Please add products to your cart before placing the order.");
-  //     return;
-  //   }
+    if (products.length === 0) {
+      alert("Please add products to your cart before placing the order.");
+      return;
+    }
 
-  //   if (formData.phone.length !== 10) {
-  //     alert("Please enter a valid 10-digit phone number.");
-  //     return;
-  //   }
+    if (formData.phone.length !== 10) {
+      alert("Please enter a valid 10-digit phone number.");
+      return;
+    }
 
-  //   const firebaseId = auth.currentUser ? auth.currentUser.uid : "";
+    const firebaseId = auth.currentUser ? auth.currentUser.uid : "";
 
-  //   const orderData = {
-  //     firebaseUid: firebaseId,
-  //     OrderInfo: formData,
-  //     items: products,
-  //     total: totals.total
-  //   };
+    const orderData = {
+      firebaseUid: firebaseId,
+      OrderInfo: formData,
+      items: products,
+      total: totals.total
+    };
 
-  //   // if (formData.paymentMethod === "cashOnDelivery") {
-  //   //   try {
-  //   //     await axios.post(apiString+'/orders/createorder', orderData);
-  //   //     alert("Order placed successfully!");
-  //   //     dispatch(clearCart());
-  //   //     navigate('/shop');
-  //   //   localStorage.removeItem("cartState");
+    if (formData.paymentMethod === "cashOnDelivery") {
+      try {
+        await axios.post(apiString+'/orders/createorder', orderData);
+        alert("Order placed successfully!");
+        dispatch(clearCart());
+        navigate('/shop');
+      localStorage.removeItem("cartState");
       
-  //   //   } catch (error) {
-  //   //     console.error("Error placing order:", error);
-  //   //   }
-  //   // } else {
-  //     handlePayment(orderData,formData.paymentMethod);
-  //   // }
-  // };
+      } catch (error) {
+        console.error("Error placing order:", error);
+      }
+    } else {
+      handlePayment(orderData,formData.paymentMethod);
+    }
+  };
   
-  function handleSubmit(){
-    console.log("order placed")
-  }
+  
   return (
     <div className="container mx-auto p-8">
       <h1 className="text-2xl font-bold mb-4">Checkout</h1>
@@ -261,10 +259,10 @@ const CheckoutPage = () => {
               <span>Taxes</span>
               <span>Rs. {(totals.taxes)}</span>
             </div>
-            <div className="flex justify-between font-bold">
+            {/* <div className="flex justify-between font-bold">
               <span>Shipping Charges</span>
               <span>Rs. {(totals.shippingCharges)}</span>
-            </div>
+            </div> */}
             <div className="flex justify-between font-bold">
               <span>Gross Total</span>
               <span>Rs. {(totals.total)}</span>
